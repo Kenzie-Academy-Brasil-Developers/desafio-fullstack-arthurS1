@@ -1,30 +1,36 @@
 import { compare } from "bcryptjs";
 import { Client } from "../entities";
-import {   userReturnListSchema, userReturnSchema } from "../schemas/clients.schema";
+import {   createReturnSchema, userReturnListSchema, userReturnSchema } from "../schemas/clients.schema";
 import { LoginReturn, UserCreate, UserLogin, UserReadReturn, UserReturn, UserUpdate } from "../interfaces/clients.interfaces";
 import { clientsRepository } from "../repositories";
 import { AppError } from "../errors/errors";
 import { sign } from "jsonwebtoken";
 
 
-export const createClientService = async (data: UserCreate): Promise<UserReturn> => {
+export const createClientService = async (data: UserCreate)=> {
+    // : Promise<UserReturn>
     const client: Client = clientsRepository.create(data)
     
     await clientsRepository.save(client)
     
-    return userReturnSchema.parse(client)
+    // return userReturnSchema.parse(client)
+    return createReturnSchema.parse(client)
 }
 
-export const readAllClientsService = async ()  => {
+export const readAllClientsService = async (id:number)  => {
     // : Promise<UserReadReturn> 
     // const users: Client[] = await clientsRepository.find()
-    const users: Client[] = await clientsRepository.find({
+    const users: Client| null = await clientsRepository.findOne({
+        where:{
+            id:id
+        },
         relations:{
             contacts:true
         }
     })
 
-    return userReturnListSchema.parse(users)
+    // return userReturnListSchema.parse(users)
+    return userReturnSchema.parse(users)
     // *************
     // return users
     // return userReturnListSchema.parse(users)

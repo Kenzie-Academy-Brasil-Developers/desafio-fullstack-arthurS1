@@ -1,16 +1,21 @@
+import { useContext } from 'react'
 import styles from './style.module.scss'
+import { ExampleContext } from '../../../providers/UserContext'
 
 
-function SecUser({ localUser }) {
+function SecUser({  userClient }) {
 
-    // console.log(localUser)
+    // const {  clientGet } = useContext(ExampleContext)
+
+    // console.log(userClient)
+    // console.log(clientGet.name)
 
     return (
 
         <>
             <section className={styles.sec}>
-                <h3 className='text title'>Olá,  {localUser.name}</h3>
-                <p className='text dont'>{localUser.course_module}</p>
+                <h3 className='text title'>Olá,  {userClient.name}</h3>
+                <p className='text dont'>{userClient.email}</p>
             </section>
         </>
     )

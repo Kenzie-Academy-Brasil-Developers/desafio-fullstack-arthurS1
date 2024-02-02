@@ -1,6 +1,6 @@
+import "express-async-errors"
 import express, { Application, json } from 'express'
 import "dotenv/config"
-import "express-async-errors"
 import { clientsRouter } from './routes/clients.routes'
 import { handleErros } from './middlewares/handleErros'
 import { contactsRouter } from './routes/contacts.routes'

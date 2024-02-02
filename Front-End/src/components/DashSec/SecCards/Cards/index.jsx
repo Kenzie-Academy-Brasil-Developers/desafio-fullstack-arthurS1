@@ -3,23 +3,27 @@ import { ExampleContext } from "../../../../providers/UserContext"
 import styles from './style.module.scss'
 import { FiEdit2 } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { TechsContext } from "../../../../providers/techs";
+import { ContactContext } from "../../../../providers/contacts";
 
 
-function Cards({ tech }) {
+function Cards({ contacts }) {
+    // console.log(contacts)
 
     const { setIsOpen2 } = useContext(ExampleContext)
-    const { delPost } = useContext(TechsContext)
+    const { delPost, seteditingContacts, delContacts } = useContext(ContactContext)
 
     const clickIdLocalStorage = (productId) => {
         // console.log(productId)
-        localStorage.setItem('@ID_POST', productId)
-        localStorage.setItem('@NAME', tech.title)
+        localStorage.setItem('@ID_CONTACTS', productId)
+        // localStorage.setItem('@NAME', contacts.name)
+        seteditingContacts(contacts)
         setIsOpen2(true)
     }
 
-    const clickDel = () => {
-        delPost()
+    const clickDel = (formData) => {
+        console.log("dellll")
+        delContacts(formData)
+        // delPost()
         setIsOpen2(false)
     }
 
@@ -28,13 +32,13 @@ function Cards({ tech }) {
         <>
             <li className={styles.li}>
                 <button className={styles.buttonClick} >
-                    <h2>{tech.title}</h2>
+                    <h2>{contacts.name}</h2>
                     <div>
-                        <p>{tech.status}</p>
-                        <button className={styles.btnEditt} onClick={() => clickIdLocalStorage(tech.id)}>
-                            <FiEdit2 size={13} color="white" />
+                        <p>{contacts.phone}</p>
+                        <button className={styles.btnEditt} onClick={() => clickIdLocalStorage(contacts.id)}>
+                            <FiEdit2 size={13} color="rgb(0 170 255)" />
                         </button>
-                        <button className={styles.btnEditt}  onClick={clickDel}>
+                        <button className={styles.btnEditt} onClick={() => clickDel(contacts.id)}>
                             <RiDeleteBin6Line size={13} color="white" />
                         </button>
                     </div>

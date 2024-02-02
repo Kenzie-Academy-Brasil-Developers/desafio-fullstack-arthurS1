@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import Logo from '../../assets/Logo.svg'
+import Logo from '../../assets/Contacts.svg'
 import FormRegister from "./ReForm"
 import styles from './style.module.scss'
 
@@ -12,7 +12,7 @@ function RegisterSec() {
         <>
         <main className="container register2">
             <article>
-                <img src={Logo} alt="" />
+                <img src={Logo} alt="" className={styles.contact} />
 
                 <Link to='/'>
                     <button className="backBtn">Voltar</button>

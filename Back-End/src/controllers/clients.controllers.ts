@@ -1,14 +1,16 @@
 import { Request, Response } from "express"
 import { UserReturn } from "../interfaces/clients.interfaces"
-import {  createClientService, deleteClientService, loginService, readAllClientsService, updateClientService } from "../services/clients.services"
+import { createClientService, deleteClientService, loginService, readAllClientsService, updateClientService } from "../services/clients.services"
 
 export const createClientController = async (req: Request, res: Response): Promise<Response> => {
-    const user: UserReturn = await createClientService(req.body)
+    // const user: UserReturn = await createClientService(req.body)
+    const user = await createClientService(req.body)
     return res.status(201).json(user)
 }
 
 export const readAllClientsController = async (req: Request, res: Response): Promise<Response> => {
-    const users = await readAllClientsService()
+    console.log(res.locals)
+    const users = await readAllClientsService(res.locals.decoded.sub)
     return res.status(200).json(users)
 }
 

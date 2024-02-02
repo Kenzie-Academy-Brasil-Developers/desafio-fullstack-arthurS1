@@ -8,9 +8,11 @@ import { ExampleContext } from "../../providers/UserContext"
 
 function DashSec() {
     // const api get() Nome etc
-    const { localUser } = useContext(ExampleContext)
+    const {   userClient } = useContext(ExampleContext)
+    // console.log(clientGet.name)
 
-//   console.log(localUser.techs)
+    // console.log(userClient)
+    //   console.log(localUser.techs)
 
     return (
 
@@ -19,7 +21,7 @@ function DashSec() {
 
             <main className="container dash">
                 {
-                    localUser ? <SecUser localUser={localUser} /> : null
+                    userClient ? <SecUser userClient={userClient} /> : null
                 }
 
                 <SecCards />

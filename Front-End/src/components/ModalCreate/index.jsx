@@ -1,25 +1,38 @@
 import { useContext } from "react"
 import { ExampleContext } from "../../providers/UserContext"
-import { TechsContext } from "../../providers/techs"
+import { ContactContext } from "../../providers/contacts"
 import styles from './style.module.scss'
 import { useForm } from "react-hook-form"
 import { api } from "../../services/api"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { formModalCreate } from "./formModalCreate"
 
 
 function ModalCreate() {
     const { setIsOpen, modalRef, buttonRef, setUser, setLista } = useContext(ExampleContext)
-    const {createTech}= useContext(TechsContext)
+    const { createTech, createContact } = useContext(ContactContext)
 
-    const { register, handleSubmit } = useForm();
+    // const { register, handleSubmit } = useForm();
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: zodResolver(formModalCreate)
+    });
 
     const subtmit = (formData) => {
-        if (formData.status == undefined || formData.status == "") {
-            alert("Preencha os dados corretamente")
-        } else {
-            console.log(formData)
-            createTech(formData)
-            setIsOpen(false)
-        }
+        // if (formData.status == undefined || formData.status == "") {
+        //     alert("Preencha os dados corretamente")
+        // } else {
+        //     createContact(formData)
+
+        //     console.log(formData)
+        //     // createTech(formData)
+        //     setIsOpen(false)
+        // }
+        createContact(formData)
+
+        console.log(formData)
+        // createTech(formData)
+        setIsOpen(false)
     }
 
     return (
@@ -27,23 +40,26 @@ function ModalCreate() {
             <div className={styles.modalOverplay}>
                 <div ref={modalRef} className={styles.moadlBox}>
                     <div className={styles.div1}>
-                        <p>Cadastrar Tecnologia</p>
+                        <p>Cadastrar Contato</p>
                         <button ref={buttonRef} onClick={() => setIsOpen(false)}>X</button>
                     </div>
 
                     <form className={styles.form} onSubmit={handleSubmit(subtmit)}>
-                        <label className="text label" htmlFor="title">Nome</label>
-                        <input className="input" type="text" id="title" {...register('title')} placeholder="Nova Tecnologia" required />
+                     
+                        <label className="text label" htmlFor="title">Nome Completo</label>
+                        {/* <input className="input" type="text" id="title" value={name}  {...register('title')} placeholder="TECNOLOGIA CLICADA" /> */}
+                        <input className="input" type="text" id="title"   {...register('name')} placeholder="Nome para Contato" />
+                        {errors.name ? <p>{errors.name.message}</p> : null}
 
-                        <label className="text label" htmlFor="status">Selecionar status</label>
-                        <select id="status"  {...register('status')} >
-                            <option value="" >Status</option>
-                            <option value="Iniciante" >Iniciante</option>
-                            <option value="Intermediário" >Intermediário</option>
-                            <option value="Avançado" >Avançado</option>
-                        </select>
+                        <label className="text label" htmlFor="title">E-mail</label>
+                        <input className="input" type="text" id="title"   {...register('email')} placeholder="E-mail para Contato" />
+                        {errors.email ? <p>{errors.email.message}</p> : null}
 
-                        <button className="cadasterBtn" type="submit">Cadastrar Tecnologia</button>
+                        <label className="text label" htmlFor="title">Número</label>
+                        <input className="input" type="text" id="title"   {...register('phone')} placeholder="Número para Contato" />
+                        {errors.phone ? <p>{errors.phone.message}</p> : null}
+
+                        <button className="cadasterBtn" type="submit">Cadastrar Contato</button>
                     </form>
 
                 </div>

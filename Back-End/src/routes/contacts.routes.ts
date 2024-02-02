@@ -15,12 +15,12 @@ contactsRouter.post("/", validateToken, validateBody(createContactSchema), verif
 
 contactsRouter.get("/", validateToken, verifyPermissions, readAllContactsController)
 
-// contactsRouter.get("/:id", isProjecttValidId, devControllers.idMovies)
+// contactsRouter.get("/:id", validateToken, )
 
-contactsRouter.patch("/:id", isContacttValidId, validateBody(updateContactSchema), validateToken, verifyPermissions, updateContactsController)
+contactsRouter.patch("/:id", isContacttValidId, validateBody(updateContactSchema), validateToken, updateContactsController)
 // contactsRouter.patch("/:id", isProjecttValidId, validateBody(coursesSchemaPatch), nameValidation, devControllers.editMovies)
 
-contactsRouter.delete("/:id", isContacttValidId, validateToken, verifyPermissions, deleteContactsController)
+contactsRouter.delete("/:id", isContacttValidId, validateToken, deleteContactsController)
 // contactsRouter.delete("/:id", isProjecttValidId, devControllers.deleteMovies)
 
 

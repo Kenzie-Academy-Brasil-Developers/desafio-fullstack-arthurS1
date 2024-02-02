@@ -8,33 +8,37 @@ import styles from './style.module.scss'
 
 
 function SecCards() {
-    const { isOpen, setIsOpen, localUser, isOpen2, setLista, setUser, user, lista, cards } = useContext(ExampleContext)
+    const { isOpen, userClient, getUser, setIsOpen, localUser, isOpen2, setLista, setUser, user, lista } = useContext(ExampleContext)
 
 
     useEffect(() => {
-        cards()
-    }, [])
+        (async () => {
+            await getUser()
+        })()
 
-    // console.log(lista)
+    }, []);
+
+    // console.log(userClient.contacts)
+
 
 
     return (
         <>
             <section className={styles.sec}>
                 <div className={styles.div}>
-                    <h2 className="text title">Tecnologias</h2>
+                    <h2 className="text title">Contatos</h2>
                     <button className="openModalCreate" onClick={() => setIsOpen(true)}>+</button>
                 </div>
 
                 {isOpen ? <ModalCreate /> : null}
 
                 <ul className={styles.ul}>
-                    {lista.length > 0 ? (
-                        lista.map((tech, index) => (
-                            <Cards key={index} tech={tech} />
+                    {Array.isArray(userClient.contacts) && userClient.contacts.length > 0 ? (
+                        userClient.contacts.map((contacts, index) => (
+                            <Cards key={index} contacts={contacts} />
                         ))
                     ) : (
-                        <p className='text title'>Você não possui nenhuma Tecnologia</p>
+                        <p className='text title'>Você não possui nenhum Contato</p>
                     )}
                 </ul>
 

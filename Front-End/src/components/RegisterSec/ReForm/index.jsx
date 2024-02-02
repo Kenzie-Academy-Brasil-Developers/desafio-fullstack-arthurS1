@@ -9,29 +9,13 @@ import styles from './style.module.scss'
 
 function FormRegister() {
 
-    const clientPost = async (formData) => {
-        try {
-            const { data } = await api.post('/clients', formData);
-            console.log(data)
-            // toastSuccess('Redirecionando para página de login.',2000)
-            // setTimeout(() => {
-            //     navigate('/')
-            // }, 2000);
-            
-        } catch (error) {
-            console.log(error.message)
-            // toastErro('E-mail já cadastrado !',3000)
-        }
-    }
-
-    // /////////1
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(formRegister)
     });
 
 
-    const { userRegister } = useContext(ExampleContext)
+    const { userRegister, clientPost } = useContext(ExampleContext)
 
 
     const subtmit = (formData) => {
@@ -44,11 +28,11 @@ function FormRegister() {
 
         <>
             <form className={styles.form} onSubmit={handleSubmit(subtmit)} >
-                <label className="text label" htmlFor="name">Nome</label>
+                <label className="text label" htmlFor="name">Nome Completo</label>
                 <input className="input" type="text" id="name" {...register('name')} placeholder="Digite aqui seu nome" />
                 {errors.name ? <p>{errors.name.message}</p> : null}
 
-                <label className="text label" htmlFor="email">Email</label>
+                <label className="text label" htmlFor="email">E-mail</label>
                 <input className="input" type="email" id="email"  {...register('email')} placeholder="Digite aqui seu e-mail" />
                 {errors.email ? <p>{errors.email.message}</p> : null}
 
@@ -66,7 +50,7 @@ function FormRegister() {
                 {errors.bio ? <p>{errors.bio.message}</p> : null} */}
 
                 <label className="text label" htmlFor="phone">Contato</label>
-                <input className="input" type="text" id="phone" {...register('phone')} placeholder="Opção de phone" />
+                <input className="input" type="text" id="phone" {...register('phone')} placeholder="Digite aqui seu número" />
                 {errors.phone ? <p>{errors.phone.message}</p> : null}
 
                 {/* <label className="text label" htmlFor="module">Selecionar módulo</label>

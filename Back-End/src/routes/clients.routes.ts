@@ -9,7 +9,7 @@ export const clientsRouter = Router()
 
 clientsRouter.post("/clients", validateBody(createUserSchema), verifyUniqueClientEmail, createClientController)
 
-clientsRouter.get("/clients", validateToken, verifyAdmin, readAllClientsController)
+clientsRouter.get("/clients", validateToken, readAllClientsController)
 // clientsRouter.get("/clients", paginationValidId, devControllers.allMovies)
 
 // clientsRouter.get("/clients/:id", isProjecttValidId, devControllers.idMovies)

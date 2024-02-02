@@ -1,5 +1,5 @@
 import { ExampleProvider } from "./providers/UserContext"
-import { TechsProvider } from "./providers/techs";
+import { ContactProvider } from "./providers/contacts";
 import Rotas from "./routes/Rotas"
 import './style/index.scss'
 import { ToastContainer } from "react-toastify"
@@ -13,9 +13,9 @@ function App() {
     <div className="App">
 
       <ExampleProvider>
-        <TechsProvider>
+        <ContactProvider>
           <Rotas />
-        </TechsProvider>
+        </ContactProvider>
       </ExampleProvider>
 
       <ToastContainer />

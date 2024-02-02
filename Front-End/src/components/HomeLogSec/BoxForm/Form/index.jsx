@@ -1,45 +1,28 @@
 import { useForm } from "react-hook-form"
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ExampleContext } from "../../../../providers/UserContext";
 import styles from './style.module.scss'
 import { api } from "../../../../services/api";
 
 function FormGo() {
 
-    const ClientLogin = async (formData) => {
-        try {
-            const { data } = await api.post('/login', formData);
-            console.log(data)
-            // localStorage.setItem('@TOKEN', data.token)
-            // localStorage.setItem('@USER', JSON.stringify(data.user))
-            // setUser(data.user)
-            
-            // toastSuccess('Redirecionando para Dashboard!', 2000)
-            // setTimeout(() => {
-            //     navigate('/dash')
-            // }, 2000);
 
-        } catch (error) {
-            console.log(error)
-            // toastErro('Senha ou e-mail incorretos !', 3000)
-        }
-    }
-    // ////////////
 
     const { register, handleSubmit } = useForm();
 
-    const { userLogin } = useContext(ExampleContext)
+    const { userLogin, clientLogin } = useContext(ExampleContext)
 
     const subtmit = (formData) => {
         console.log(formData)
+        // console.log(formData.email)
         // userLogin(formData)
-        ClientLogin(formData)
+        clientLogin(formData)
     }
 
     return (
         <>
             <form className={styles.form} onSubmit={handleSubmit(subtmit)}>
-                <label className="text label" htmlFor="email">Email</label>
+                <label className="text label" htmlFor="email">E-mail</label>
                 <input className="input" type="email" id="email" {...register('email')} placeholder="Digite seu e-mail" required />
 
                 <label className="text label" htmlFor="password">Senha</label>

@@ -1,12 +1,21 @@
 .container {
+  // width: 100%;
+  // display: flex;
+  // max-width: 1204px;
+  // height: 100%;
+  // margin: 84px auto;
+  // flex-direction: column;
+  // align-items: center;
+  // gap: 42px;
+
   width: 100%;
   display: flex;
   max-width: 1204px;
   height: 100%;
-  margin: 84px auto;
+  margin: 1px auto;
   flex-direction: column;
+  /* gap: 42px; */
   align-items: center;
-  gap: 42px;
 
   @media (max-width:420px) {
     padding: 0px 10px;
@@ -14,12 +23,13 @@
 
   &.register2 {
     margin: 20px auto;
-    gap: 36px;
+    // gap: 36px;
 
     &>article {
       display: flex;
       flex-direction: row;
-      gap: 185px;
+      // gap: 185px;
+      gap: 196px;
       align-items: center;
 
       @media (max-width:420px) {

@@ -17,23 +17,8 @@ export const ExampleProvider = ({ children }) => {
 
     const [lista, setLista] = useState([])
 
-    const cards = async () => {
-        const token = localStorage.getItem('@TOKEN')
-        try {
-            const { data } = await api.get('/profile', {
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                }
-            });
 
-            console.log(data)
-            setLista(data.techs)
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    function toastSuccess( message, time) {
+    function toastSuccess(message, time) {
         toast.success(message, {
             position: "top-right",
             autoClose: time,
@@ -49,7 +34,7 @@ export const ExampleProvider = ({ children }) => {
             }
         });
     }
-    function toastErro( message, time) {
+    function toastErro(message, time) {
         toast.error(message, {
             position: "top-right",
             autoClose: time,
@@ -67,47 +52,16 @@ export const ExampleProvider = ({ children }) => {
     }
 
 
-    const userRegister = async (formData) => {
-        try {
-            const { data } = await api.post('/users', formData);
-            console.log(data)
-            toastSuccess('Redirecionando para página de login.',2000)
-            setTimeout(() => {
-                navigate('/')
-            }, 2000);
-
-        } catch (error) {
-            console.log(error.message)
-            toastErro('E-mail já cadastrado !',3000)
-        }
-    }
-
-    const userLogin = async (formData) => {
-        try {
-            const { data } = await api.post('/sessions', formData);
-            console.log(data)
-            localStorage.setItem('@TOKEN', data.token)
-            localStorage.setItem('@USER', JSON.stringify(data.user))
-            setUser(data.user)
-            toastSuccess('Redirecionando para Dashboard!',2000)
-            setTimeout(() => {
-                navigate('/dash')
-            }, 2000);
-
-        } catch (error) {
-            console.log(error)
-            toastErro('Senha ou e-mail incorretos !',3000)
-        }
-    }
 
     const userLogout = () => {
-        localStorage.removeItem('@TOKEN')
-        localStorage.removeItem('@USER')
+        // localStorage.removeItem('@TOKEN')
+        // localStorage.removeItem('@USER')
+        localStorage.clear()
         setUser(null)
         navigate('/')
     }
 
-    const localUser = JSON.parse(localStorage.getItem('@USER'))
+    // const localUser = JSON.parse(localStorage.getItem('@USER'))
 
     useEffect(() => {
         const loadUser = async () => {
@@ -116,8 +70,9 @@ export const ExampleProvider = ({ children }) => {
             if (localToken) {
                 toastSuccess("Usuário já logado .", 2000)
                 navigate("/dash")
-            }else{
+            } else {
                 navigate("/")
+                toastErro("Usuário não logado .", 2000)
             }
         }
         loadUser()
@@ -134,13 +89,76 @@ export const ExampleProvider = ({ children }) => {
 
     const [isOpen2, setIsOpen2] = useState(false)
 
+    // /////////////////////////////////////
+
+    const clientPost = async (formData) => {
+        try {
+            const { data } = await api.post('/clients', formData);
+            console.log(data)
+            toastSuccess('Redirecionando para página de login.', 2000)
+            setTimeout(() => {
+                navigate('/')
+            }, 2000);
+            alert("sucesso")
+
+        } catch (error) {
+            console.log(error.message)
+            console.log(error)
+            toastErro('E-mail já cadastrado !', 3000)
+        }
+    }
+
+    const clientLogin = async (formData) => {
+        try {
+            const { data } = await api.post('/login', formData);
+            console.log(data)
+            localStorage.setItem('@TOKEN', data.token)
+            // localStorage.setItem('@USER', JSON.stringify(data.user))
+            localStorage.setItem('@EMAIL', JSON.stringify(formData.email))
+            // setUser(data.user)
+            // navigate('/dash')
+
+            toastSuccess('Redirecionando para Dashboard!', 2000)
+            setTimeout(() => {
+                navigate('/dash')
+            }, 2000);
+
+        } catch (error) {
+            console.log(error.message)
+            toastErro('Senha ou e-mail incorretos !', 3000)
+        }
+    }
+
+    const [userClient, setUserClient] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            await getUser()
+        })()
+
+    }, []);
+    const getUser = async () => {
+        try {
+            const token = localStorage.getItem('@TOKEN')
+            const { data } = await api.get('/clients', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+            setUserClient(data);
+            // console.log(data)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    // console.log(userClient.contacts)
 
 
 
 
 
     return (
-        <ExampleContext.Provider value={{ toastSuccess ,toastErro ,cards, setLista, user, userLogin, userRegister, userLogout, isOpen, setIsOpen, modalRef, buttonRef, localUser, isOpen2, setIsOpen2, setUser, lista }}>
+        <ExampleContext.Provider value={{ clientLogin, getUser, userClient, clientPost, toastSuccess, toastErro, setLista, user, userLogout, isOpen, setIsOpen, modalRef, buttonRef, isOpen2, setIsOpen2, setUser, lista }}>
             {children}
         </ExampleContext.Provider>
     )
