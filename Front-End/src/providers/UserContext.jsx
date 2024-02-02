@@ -76,6 +76,7 @@ export const ExampleProvider = ({ children }) => {
             }
         }
         loadUser()
+        getUser()
     }, [])
 
     const modalRef = useOutclick(() => {
@@ -99,7 +100,7 @@ export const ExampleProvider = ({ children }) => {
             setTimeout(() => {
                 navigate('/')
             }, 2000);
-            alert("sucesso")
+            // alert("sucesso")
 
         } catch (error) {
             console.log(error.message)
