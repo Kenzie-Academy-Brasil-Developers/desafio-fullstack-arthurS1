@@ -8,18 +8,12 @@ import { sign } from "jsonwebtoken";
 
 
 export const createClientService = async (data: UserCreate)=> {
-    // : Promise<UserReturn>
     const client: Client = clientsRepository.create(data)
-    
     await clientsRepository.save(client)
-    
-    // return userReturnSchema.parse(client)
     return createReturnSchema.parse(client)
 }
 
 export const readAllClientsService = async (id:number)  => {
-    // : Promise<UserReadReturn> 
-    // const users: Client[] = await clientsRepository.find()
     const users: Client| null = await clientsRepository.findOne({
         where:{
             id:id
@@ -29,12 +23,7 @@ export const readAllClientsService = async (id:number)  => {
         }
     })
 
-    // return userReturnListSchema.parse(users)
     return userReturnSchema.parse(users)
-    // *************
-    // return users
-    // return userReturnListSchema.parse(users)
-    // return readAllClientSchema.parse(users)
 }
 
 export const loginService = async (data: UserLogin): Promise<LoginReturn> => {
@@ -67,59 +56,4 @@ export const updateClientService = async (data: UserUpdate, user: Client): Promi
 export const deleteClientService = async (user: Client): Promise<void> => {
     await clientsRepository.remove(user)
 }
-
-// export const createMovie99 = async (payload: any) => {
-//     const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie)
-//     const movie = movieRepository.create(payload)
-//     await movieRepository.save(movie)
-//     const movieComplet = coursesSchemaId.parse(movie)
-
-//     return movieComplet
-// }
-
-// export const idMovies = async (payload: any) => {
-//     const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie)
-//     const movie = await movieRepository.findOne({
-//         where: {
-//             id: Number(payload),
-//         },
-//     })
-
-//     return movie
-// }
-
-// export const allMovies = async ({ nextPage, page, perPage, movieCount, prevPage, sort2 }: any) => {
-//     const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie)
-//     const movie = await movieRepository.find({
-//         take: perPage,
-//         skip: perPage * (page - 1),
-//         order: sort2
-//     })
-
-//     return {
-//         prevPage: prevPage,
-//         nextPage: nextPage,
-//         count: movieCount.length,
-//         data: movie
-//     }
-// }
-
-// export const deleteMovies = async (payload: any) => {
-//     const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie)
-//     const movie = await movieRepository.delete({ id: Number(payload) })
-
-//     return movie
-// }
-
-// export const editMovies = async (id: any, payload: any) => {
-//     const movieRepository: Repository<Movie> = AppDataSource.getRepository(Movie)
-//     const movie = await movieRepository.update({ id: Number(id) }, payload)
-//     const movieFind = await movieRepository.findOne({
-//         where: {
-//             id: Number(id),
-//         },
-//     })
-    
-//     return movieFind
-// }
 

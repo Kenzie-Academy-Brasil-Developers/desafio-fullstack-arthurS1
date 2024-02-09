@@ -7,23 +7,18 @@ import { ContactContext } from "../../../../providers/contacts";
 
 
 function Cards({ contacts }) {
-    // console.log(contacts)
 
     const { setIsOpen2 } = useContext(ExampleContext)
-    const { delPost, seteditingContacts, delContacts } = useContext(ContactContext)
+    const {  seteditingContacts, delContacts } = useContext(ContactContext)
 
     const clickIdLocalStorage = (productId) => {
-        // console.log(productId)
         localStorage.setItem('@ID_CONTACTS', productId)
-        // localStorage.setItem('@NAME', contacts.name)
         seteditingContacts(contacts)
         setIsOpen2(true)
     }
 
     const clickDel = (formData) => {
-        console.log("dellll")
         delContacts(formData)
-        // delPost()
         setIsOpen2(false)
     }
 

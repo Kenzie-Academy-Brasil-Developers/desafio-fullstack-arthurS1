@@ -2,7 +2,6 @@ import { useForm } from "react-hook-form"
 import { useContext, useEffect } from "react";
 import { ExampleContext } from "../../../../providers/UserContext";
 import styles from './style.module.scss'
-import { api } from "../../../../services/api";
 
 function FormGo() {
 
@@ -10,12 +9,10 @@ function FormGo() {
 
     const { register, handleSubmit } = useForm();
 
-    const { userLogin, clientLogin } = useContext(ExampleContext)
+    const {  clientLogin } = useContext(ExampleContext)
 
     const subtmit = (formData) => {
-        console.log(formData)
-        // console.log(formData.email)
-        // userLogin(formData)
+     
         clientLogin(formData)
     }
 

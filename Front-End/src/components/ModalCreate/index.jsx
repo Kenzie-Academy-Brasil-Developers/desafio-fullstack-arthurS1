@@ -3,35 +3,21 @@ import { ExampleContext } from "../../providers/UserContext"
 import { ContactContext } from "../../providers/contacts"
 import styles from './style.module.scss'
 import { useForm } from "react-hook-form"
-import { api } from "../../services/api"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { formModalCreate } from "./formModalCreate"
 
 
 function ModalCreate() {
-    const { setIsOpen, modalRef, buttonRef, setUser, setLista } = useContext(ExampleContext)
-    const { createTech, createContact } = useContext(ContactContext)
+    const { setIsOpen, modalRef, buttonRef } = useContext(ExampleContext)
+    const {  createContact } = useContext(ContactContext)
 
-    // const { register, handleSubmit } = useForm();
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         resolver: zodResolver(formModalCreate)
     });
 
     const subtmit = (formData) => {
-        // if (formData.status == undefined || formData.status == "") {
-        //     alert("Preencha os dados corretamente")
-        // } else {
-        //     createContact(formData)
-
-        //     console.log(formData)
-        //     // createTech(formData)
-        //     setIsOpen(false)
-        // }
         createContact(formData)
-
-        console.log(formData)
-        // createTech(formData)
         setIsOpen(false)
     }
 
@@ -47,7 +33,6 @@ function ModalCreate() {
                     <form className={styles.form} onSubmit={handleSubmit(subtmit)}>
                      
                         <label className="text label" htmlFor="title">Nome Completo</label>
-                        {/* <input className="input" type="text" id="title" value={name}  {...register('title')} placeholder="TECNOLOGIA CLICADA" /> */}
                         <input className="input" type="text" id="title"   {...register('name')} placeholder="Nome para Contato" />
                         {errors.name ? <p>{errors.name.message}</p> : null}
 

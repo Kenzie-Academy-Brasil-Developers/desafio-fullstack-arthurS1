@@ -1,14 +1,8 @@
-import { useContext } from 'react'
 import styles from './style.module.scss'
-import { ExampleContext } from '../../../providers/UserContext'
 
 
 function SecUser({  userClient }) {
 
-    // const {  clientGet } = useContext(ExampleContext)
-
-    // console.log(userClient)
-    // console.log(clientGet.name)
 
     return (
 

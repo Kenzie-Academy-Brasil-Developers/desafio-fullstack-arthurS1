@@ -15,14 +15,8 @@ class Contact {
     @Column({ type: 'varchar', length: 50 })
     phone: string
 
-    // @Column({ type: 'date' })
-    // date: string
-
     @CreateDateColumn({ type: 'date' })
     createdAt: Date | string
-
-    // @UpdateDateColumn({ type: 'date' })
-    // updatedAt: string
 
     @ManyToOne(() => Client, (client) => client.contacts )
     client: Client

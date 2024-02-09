@@ -11,7 +11,7 @@ export const handleErros = (error: Error, req: Request, res: Response, next: Nex
     if (error instanceof ZodError) {
         return res.status(400).json({ message: error.flatten().fieldErrors })
     }
-    // ****************************
+
     if (error instanceof JsonWebTokenError) {
         return res.status(401).json({ message: error.message })
     }

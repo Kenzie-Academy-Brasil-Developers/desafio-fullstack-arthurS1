@@ -1,8 +1,5 @@
 .contact {
-    // transform: scale(0.5);
     height: 191px;
-    // width: 145px;
-    // height: 21px;
     position: relative;
     left: -38px;
 }
@@ -19,7 +16,6 @@
     justify-content: space-between;
 
     @media (max-width:700px) {
-        // background-color: aqua;
         padding: 26px 5px;
     }
 }

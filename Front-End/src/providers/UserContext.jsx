@@ -54,14 +54,11 @@ export const ExampleProvider = ({ children }) => {
 
 
     const userLogout = () => {
-        // localStorage.removeItem('@TOKEN')
-        // localStorage.removeItem('@USER')
         localStorage.clear()
         setUser(null)
         navigate('/')
     }
 
-    // const localUser = JSON.parse(localStorage.getItem('@USER'))
 
     useEffect(() => {
         const loadUser = async () => {
@@ -90,21 +87,17 @@ export const ExampleProvider = ({ children }) => {
 
     const [isOpen2, setIsOpen2] = useState(false)
 
-    // /////////////////////////////////////
 
     const clientPost = async (formData) => {
         try {
             const { data } = await api.post('/clients', formData);
-            console.log(data)
             toastSuccess('Redirecionando para página de login.', 2000)
             setTimeout(() => {
                 navigate('/')
             }, 2000);
-            // alert("sucesso")
 
         } catch (error) {
             console.log(error.message)
-            console.log(error)
             toastErro('E-mail já cadastrado !', 3000)
         }
     }
@@ -112,13 +105,9 @@ export const ExampleProvider = ({ children }) => {
     const clientLogin = async (formData) => {
         try {
             const { data } = await api.post('/login', formData);
-            console.log(data)
             localStorage.setItem('@TOKEN', data.token)
-            // localStorage.setItem('@USER', JSON.stringify(data.user))
             localStorage.setItem('@EMAIL', JSON.stringify(formData.email))
-            // setUser(data.user)
-            // navigate('/dash')
-
+          
             toastSuccess('Redirecionando para Dashboard!', 2000)
             setTimeout(() => {
                 navigate('/dash')
@@ -147,15 +136,10 @@ export const ExampleProvider = ({ children }) => {
                 }
             });
             setUserClient(data);
-            // console.log(data)
         } catch (error) {
             console.log(error);
         }
     };
-    // console.log(userClient.contacts)
-
-
-
 
 
     return (

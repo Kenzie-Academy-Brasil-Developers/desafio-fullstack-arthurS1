@@ -3,7 +3,6 @@ import Cards from "./Cards"
 import { ExampleContext } from "../../../providers/UserContext"
 import ModalCreate from "../../ModalCreate"
 import ModalFill from "../../ModalFill"
-import { api } from "../../../services/api"
 import styles from './style.module.scss'
 
 
@@ -17,9 +16,6 @@ function SecCards() {
         })()
 
     }, []);
-
-    // console.log(userClient.contacts)
-
 
 
     return (

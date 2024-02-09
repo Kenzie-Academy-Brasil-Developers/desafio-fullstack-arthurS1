@@ -12,18 +12,15 @@ export const createContactService = async (data: CreateSchedules, userId: number
 
     await contactsRepository.save(contact)
 
-    // return contact
     return createContactSchema.parse(contact)
 }
 
 export const readAllContactsService = async () => {
     const users: Contact[] = await contactsRepository.find()
     return users
-    // return schedulesSchema.parse(users)
 }
 
 export const updateContactsService = async (payload: any, id: number) => {
-    // const userUpdate: Contact[] = contactsRepository.create({ ...user, ...data })
     const contact: Contact | null = await contactsRepository.findOne({
         where: {
             id: id,

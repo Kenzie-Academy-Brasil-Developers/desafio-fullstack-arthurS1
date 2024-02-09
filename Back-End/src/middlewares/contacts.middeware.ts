@@ -1,45 +1,8 @@
 import { NextFunction, Request, Response } from "express"
 import "dotenv/config"
 import { AppError } from "../errors/errors";
-import { clientsRepository, contactsRepository } from "../repositories";
+import {  contactsRepository } from "../repositories";
 import { Contact } from "../entities";
-// import {  realEstateRepository, schedulesRepository } from "../repositories";
-// import { Schedule } from "../entities";
-
-
-// export const verifyRealEstateExist = async (req: Request, res: Response, next: NextFunction) => {
-//     const { realEstateId } = req.body
-//     const realEstate = await realEstateRepository.findOne({
-//         where: {
-//             id: Number(realEstateId)
-//         }
-//     })
-//     if (!realEstate) {
-//         throw new AppError('RealEstate not found', 404)
-//     }
-
-//     return next()
-// }
-
-// export const verifyRealEstateSchedulesExist = async (req: Request, res: Response, next: NextFunction) => {
-//     const { realEstateId, hour, date } = req.body
-
-//     const schedules = await schedulesRepository.findOne({
-//         where: {
-//             realEstate: {
-//                 id: Number(realEstateId)
-//             },
-//             hour,
-//             date
-//         }
-//     })
-
-//     if (schedules) {
-//         throw new AppError('Schedule to this real estate at this date and time already exists', 409)
-//     }
-
-//     return next()
-// }
 
 export const verifyClientInContactExist = async (req: Request, res: Response, next: NextFunction) => {
     let { sub } = res.locals.decoded
@@ -51,8 +14,7 @@ export const verifyClientInContactExist = async (req: Request, res: Response, ne
             client: {
                 id: sub
             },
-            // date,
-            // hour
+            
         }
     })
 
@@ -74,11 +36,7 @@ export const verifyUniqueContactEmail = async (req: Request, res: Response, next
     return next()
 }
 
-// import { NextFunction, Request, Response } from "express"
-// import { AppError } from "../errors/errors"
-// import { AppDataSource } from "../data-source"
-// import { Movie } from "../entities"
-// import { Repository } from "typeorm"
+
 
 export const isContacttValidId = async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params

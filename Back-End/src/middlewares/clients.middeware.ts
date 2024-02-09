@@ -27,20 +27,3 @@ export const verifyClientExists = async (req: Request, res: Response, next: Next
 
     return next()
 }
-
-// ;;;;;;;;;;
-// export const isClienttValidId = async (req: Request, res: Response, next: NextFunction) => {
-//     const { id } = req.params
-
-//     const movie = await clientsRepository.findOne({
-//         where: {
-//             id: Number(id),
-//         },
-//     })
-
-
-//     if (!movie) {
-//         throw new AppError("Client ID not found", 404);
-//     }
-//     return next()
-// }

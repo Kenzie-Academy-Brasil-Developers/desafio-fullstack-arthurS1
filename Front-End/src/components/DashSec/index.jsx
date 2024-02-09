@@ -7,13 +7,8 @@ import { ExampleContext } from "../../providers/UserContext"
 
 
 function DashSec() {
-    // const api get() Nome etc
     const {   userClient } = useContext(ExampleContext)
-    // console.log(clientGet.name)
-
-    // console.log(userClient)
-    //   console.log(localUser.techs)
-
+   
     return (
 
         <>

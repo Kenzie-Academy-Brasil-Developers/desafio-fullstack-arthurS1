@@ -1,8 +1,6 @@
 import { useForm } from "react-hook-form";
 import { formRegister } from "./formRegister";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { api } from "../../../services/api";
-import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { ExampleContext } from "../../../providers/UserContext";
 import styles from './style.module.scss'
@@ -15,12 +13,10 @@ function FormRegister() {
     });
 
 
-    const { userRegister, clientPost } = useContext(ExampleContext)
+    const {  clientPost } = useContext(ExampleContext)
 
 
     const subtmit = (formData) => {
-        console.log(formData)
-        // userRegister(formData)
         clientPost(formData)
     }
 
@@ -45,23 +41,9 @@ function FormRegister() {
                 {errors.confirm ? <p>{errors.confirm.message}</p> : null}
 
 
-                {/* <label className="text label" htmlFor="bio">Bio</label>
-                <input className="input" type="text" id="bio" {...register('bio')} placeholder="Fale sobre você" />
-                {errors.bio ? <p>{errors.bio.message}</p> : null} */}
-
                 <label className="text label" htmlFor="phone">Contato</label>
                 <input className="input" type="text" id="phone" {...register('phone')} placeholder="Digite aqui seu número" />
                 {errors.phone ? <p>{errors.phone.message}</p> : null}
-
-                {/* <label className="text label" htmlFor="module">Selecionar módulo</label>
-                <select id="module"  {...register('course_module')} >
-                    <option value="" >Módulos</option>
-                    <option value="Primeiro módulo (Introdução ao Frontend)" >Primeiro Módulo</option>
-                    <option value="Segundo módulo (Frontend Avançado)" >Segundo Módulo</option>
-                    <option value="Terceiro módulo (Introdução ao Backend)" >Terceiro Módulo</option>
-                    <option value="Quarto módulo (Backend Avançado)" >Quarto Módulo</option>
-                </select>
-                {errors.course_module ? <p>{errors.course_module.message}</p> : null} */}
 
                 <button className="cadasterBtn" type="submit">Cadastrar</button>
             </form>
