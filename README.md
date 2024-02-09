@@ -74,22 +74,210 @@ npm run dev
 
 ### 🛸 1. **Criação de Cliente**
 
-### `/users`
+### `/clients`
 
 ### Exemplo de Request:
 ```
-POST /users
-Host: http://suaapi.com/v1
+POST /clients/
+Host: 'http://localhost:3000/
 Authorization: None
 Content-type: application/json
+```
+### Exemplo de Response:
+```
+201 Created
 ```
 
 ### Corpo da Requisição:
 ```json
 {
-	"name": "eDuArDo",
-	"email": "edu@mail.com",
-	"password": "1234",
-	"isAdm": true
+  "name": "Cliente A",
+  "email": "abc@gmail.com",
+  "password": "1234",
+  "phone": "6199301-4861",
+  "admin":true (opcional)
 }
 ```
+
+### Exemplo de Request:
+```
+GET /clients/
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": 3,
+	"name": "Cliente A",
+	"email": "abc@gmail.com",
+	"phone": "6199301-4861",
+	"admin": true,
+	"createdAt": "2024-01-30",
+	"contacts": [
+		{
+			"id": 7,
+			"name": "Sem d9escr999iption",
+			"email": "afiuaw999bfi@gmail.com",
+			"phone": "200",
+			"createdAt": "2024-01-30"
+		},
+		{
+			"id": 9,
+			"name": "Sem d9escr999iption",
+			"email": "afiuaw9999bfi@gmail.com",
+			"phone": "200",
+			"createdAt": "2024-01-30"
+		},
+		{
+			"id": 11,
+			"name": "Sem d9escr999iption",
+			"email": "afiuaw99999bfi@gmail.com",
+			"phone": "200",
+			"createdAt": "2024-01-30"
+		}
+	]
+}
+```
+### `/clients/:id`
+
+### Exemplo de Request:
+```
+PATCH /clients/:id
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+### Corpo da Requisição:
+```json
+{
+  "name": "Cliente AB",
+}
+```
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": 3,
+	"name": "Cliente AB",
+	"email": "abc@gmail.com",
+	"phone": "6199301-4861",
+	"admin": true,
+	"createdAt": "2024-01-30",
+}
+```
+### Exemplo de Request:
+```
+DEL /clients/:id
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+
+### Exemplo de Response:
+```
+204 Delete Succefully
+```
+
+### 🛸 2. **Criação de Contacts**
+
+### `/contacts`
+
+### Exemplo de Request:
+```
+POST /contacts/
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+### Exemplo de Response:
+```
+201 Created
+```
+
+### Corpo da Requisição:
+```json
+{
+  "name": "Sem d9escr999iption",
+  "email": "afiuaw99999bfi@gmail.com",
+  "phone": "200"
+}
+```
+### Exemplo de Request:
+```
+GET /contacts/
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+[
+	{
+		"id": 1,
+		"name": "Cliente A",
+		"email": "abc@gmail.com",
+		"phone": "209990",
+		"createdAt": "2024-01-30"
+	},
+	{
+		"id": 2,
+		"name": "Cliente B",
+		"email": "abcd@gmail.com",
+		"phone": "299900",
+		"createdAt": "2024-01-30"
+	}
+]
+```
+### `/contacts/:id`
+
+### Exemplo de Request:
+```
+PACTH /contacts/
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+### Corpo da Requisição:
+```json
+{
+  "name": "Cliente Abc",
+}
+```
+
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+{
+		"id": 1,
+		"name": "Cliente Abc",
+		"email": "abc@gmail.com",
+		"phone": "209990",
+		"createdAt": "2024-01-30"
+}
+```
+### Exemplo de Request:
+```
+DEL /contacts/
+Host: 'http://localhost:3000/
+Authorization: Required
+Content-type: application/json
+```
+
+### Exemplo de Response:
+```
+204 Delete Succefully
+```
+
