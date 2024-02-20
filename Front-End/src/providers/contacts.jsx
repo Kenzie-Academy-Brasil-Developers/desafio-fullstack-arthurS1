@@ -7,7 +7,7 @@ export const ContactContext = createContext({})
 
 export const ContactProvider = ({ children }) => {
 
-    const {  toastSuccess, getUser, toastErro } = useContext(ExampleContext)
+    const { toastSuccess, getUser, toastErro } = useContext(ExampleContext)
 
 
     const createContact = async (formData) => {
@@ -48,7 +48,6 @@ export const ContactProvider = ({ children }) => {
 
     const delContacts = async (formData) => {
         const token = localStorage.getItem('@TOKEN')
-   
 
         try {
             const { data } = await api.delete(`/contacts/${formData}`, {
@@ -67,7 +66,7 @@ export const ContactProvider = ({ children }) => {
 
 
     return (
-        <ContactContext.Provider value={{  createContact, pacthContacts, seteditingContacts, editingContacts, delContacts }}>
+        <ContactContext.Provider value={{ createContact, pacthContacts, seteditingContacts, editingContacts, delContacts }}>
             {children}
         </ContactContext.Provider>
     )

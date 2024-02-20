@@ -26,6 +26,7 @@ export const createUserSchema = usersSchema.pick({
 export const userWithoutAdmin = createUserSchema.omit({ admin: true })
 export const updateUserSchema = userWithoutAdmin.partial()
 export const userReturnSchema = usersSchema.omit({ password: true })
+export const userReturnSchemaPatch = usersSchema.omit({ password: true, contacts: true })
 export const createReturnSchema = usersSchema.omit({ password: true, contacts: true })
 export const userReturnListSchema = userReturnSchema.array()
 export const userReadSchema = userReturnSchema.array()

@@ -1,7 +1,7 @@
 import { compare } from "bcryptjs";
 import { Client } from "../entities";
-import {   createReturnSchema, userReturnListSchema, userReturnSchema } from "../schemas/clients.schema";
-import { LoginReturn, UserCreate, UserLogin, UserReadReturn, UserReturn, UserUpdate } from "../interfaces/clients.interfaces";
+import {   createReturnSchema, userReturnListSchema, userReturnSchema, userReturnSchemaPatch } from "../schemas/clients.schema";
+import { LoginReturn, UserCreate, UserLogin, UserReadReturn, UserReturn, UserReturnPacth, UserUpdate } from "../interfaces/clients.interfaces";
 import { clientsRepository } from "../repositories";
 import { AppError } from "../errors/errors";
 import { sign } from "jsonwebtoken";
@@ -45,12 +45,12 @@ export const loginService = async (data: UserLogin): Promise<LoginReturn> => {
     return { token }
 }
 
-export const updateClientService = async (data: UserUpdate, user: Client): Promise<UserReturn> => {
+export const updateClientService = async (data: UserUpdate, user: Client): Promise<UserReturnPacth> => {
     const userUpdate: Client = clientsRepository.create({ ...user, ...data })
     
     await clientsRepository.save(userUpdate)
    
-    return userReturnSchema.parse(userUpdate)
+    return userReturnSchemaPatch.parse(userUpdate)
 }
 
 export const deleteClientService = async (user: Client): Promise<void> => {

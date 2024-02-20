@@ -7,8 +7,8 @@ import { ExampleContext } from "../../providers/UserContext"
 
 
 function DashSec() {
-    const {   userClient } = useContext(ExampleContext)
-   
+    const { userClient } = useContext(ExampleContext)
+
     return (
 
         <>

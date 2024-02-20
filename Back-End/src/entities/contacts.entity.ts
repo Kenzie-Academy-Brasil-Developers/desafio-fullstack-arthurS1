@@ -1,4 +1,4 @@
-import {  Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Client from "./clients.entity";
 
 @Entity('contacts')
@@ -18,7 +18,7 @@ class Contact {
     @CreateDateColumn({ type: 'date' })
     createdAt: Date | string
 
-    @ManyToOne(() => Client, (client) => client.contacts )
+    @ManyToOne(() => Client, (client) => client.contacts, { onDelete: "CASCADE" })
     client: Client
 
 }

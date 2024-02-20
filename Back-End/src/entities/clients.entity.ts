@@ -27,7 +27,7 @@ class Client {
     createdAt: Date | string
 
 
-    @OneToMany(() => Contact, (contact) => contact.client)
+    @OneToMany(() => Contact, (contact) => contact.client, { cascade: true })
     contacts: Contact[]
 
     @BeforeInsert()

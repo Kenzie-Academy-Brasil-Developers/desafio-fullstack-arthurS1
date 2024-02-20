@@ -13,6 +13,10 @@ export const ExampleProvider = ({ children }) => {
 
     const [isOpen, setIsOpen] = useState(false)
 
+    const [isOpenClient, setIsOpenClient] = useState(false)
+
+    const [editingClient, seteditingClient] = useState(null)
+
     const navigate = useNavigate();
 
     const [lista, setLista] = useState([])
@@ -107,7 +111,7 @@ export const ExampleProvider = ({ children }) => {
             const { data } = await api.post('/login', formData);
             localStorage.setItem('@TOKEN', data.token)
             localStorage.setItem('@EMAIL', JSON.stringify(formData.email))
-          
+
             toastSuccess('Redirecionando para Dashboard!', 2000)
             setTimeout(() => {
                 navigate('/dash')
@@ -130,20 +134,60 @@ export const ExampleProvider = ({ children }) => {
     const getUser = async () => {
         try {
             const token = localStorage.getItem('@TOKEN')
+
             const { data } = await api.get('/clients', {
                 headers: {
                     'Authorization': `Bearer ${token}`,
                 }
             });
+            localStorage.setItem('@IDUSER', JSON.stringify(data.id))
+
             setUserClient(data);
+            seteditingClient(data)
         } catch (error) {
             console.log(error);
         }
     };
 
+    const pacthClients = async (formData) => {
+        const token = localStorage.getItem('@TOKEN')
+        const idUser = localStorage.getItem('@IDUSER')
+        try {
+            const { data } = await api.patch(`/clients/${idUser}`, formData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+            toastSuccess('Usuário atualizado !', 2000)
+            getUser()
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const delClient = async (formData) => {
+        const token = localStorage.getItem('@TOKEN')
+
+        try {
+            const { data } = await api.delete(`/clients/${formData}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                }
+            });
+            toastSuccess('Usuário Deletado !', 2000)
+            setTimeout(() => {
+                navigate('/')
+            }, 2000);
+
+            await getUser()
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
-        <ExampleContext.Provider value={{ clientLogin, getUser, userClient, clientPost, toastSuccess, toastErro, setLista, user, userLogout, isOpen, setIsOpen, modalRef, buttonRef, isOpen2, setIsOpen2, setUser, lista }}>
+        <ExampleContext.Provider value={{ delClient, clientLogin, editingClient, seteditingClient, pacthClients, setIsOpenClient, isOpenClient, getUser, userClient, clientPost, toastSuccess, toastErro, setLista, user, userLogout, isOpen, setIsOpen, modalRef, buttonRef, isOpen2, setIsOpen2, setUser, lista }}>
             {children}
         </ExampleContext.Provider>
     )

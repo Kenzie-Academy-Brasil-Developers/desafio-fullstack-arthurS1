@@ -4,10 +4,11 @@ import { ExampleContext } from "../../../providers/UserContext"
 import ModalCreate from "../../ModalCreate"
 import ModalFill from "../../ModalFill"
 import styles from './style.module.scss'
+import ModalClientFill from "../../ModalClientFill"
 
 
 function SecCards() {
-    const { isOpen, userClient, getUser, setIsOpen, localUser, isOpen2, setLista, setUser, user, lista } = useContext(ExampleContext)
+    const { isOpen, userClient, getUser, setIsOpen, localUser, isOpen2, setLista, setUser, user, isOpenClient, lista } = useContext(ExampleContext)
 
 
     useEffect(() => {
@@ -39,6 +40,9 @@ function SecCards() {
                 </ul>
 
                 {isOpen2 ? <ModalFill /> : null}
+
+                {isOpenClient ? <ModalClientFill /> : null}
+
 
             </section>
         </>
