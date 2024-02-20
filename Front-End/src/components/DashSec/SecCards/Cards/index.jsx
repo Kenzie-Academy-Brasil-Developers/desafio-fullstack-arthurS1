@@ -3,7 +3,7 @@ import { ExampleContext } from "../../../../providers/UserContext"
 import styles from './style.module.scss'
 import { FiEdit2 } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import { ContactContext } from "../../../../providers/contacts";
+import { ContactContext } from "../../../../providers/Contacts";
 
 
 function Cards({ contacts }) {

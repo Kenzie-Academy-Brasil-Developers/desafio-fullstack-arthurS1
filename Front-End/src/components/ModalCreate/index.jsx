@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { ExampleContext } from "../../providers/UserContext"
-import { ContactContext } from "../../providers/contacts"
+import { ContactContext } from "../../providers/Contacts"
 import styles from './style.module.scss'
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"

@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 import { ExampleContext } from "../../providers/UserContext"
 import styles from './style.module.scss'
 import { useForm } from "react-hook-form"
-import { ContactContext } from "../../providers/contacts"
+import { ContactContext } from "../../providers/Contacts"
 
 
 

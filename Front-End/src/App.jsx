@@ -1,5 +1,5 @@
 import { ExampleProvider } from "./providers/UserContext"
-import { ContactProvider } from "./providers/contacts";
+import { ContactProvider } from "./providers/Contacts";
 import Rotas from "./routes/Rotas"
 import './style/index.scss'
 import { ToastContainer } from "react-toastify"
